@@ -49,3 +49,53 @@ query {
   }
 }
 ```
+
+Paging example. See schema_queries.py, class Query, all_dishes / resolve_all_dishes:
+```graphql
+query {
+  allDishes(skip: 0, first: 1) {
+    id
+    recipe
+    ingredients {
+      name
+    }
+  }
+}
+```
+
+## 3.2 Create / delete an object
+See schema_mutations.py, class CreateDish:
+```graphql
+mutation {
+  createDish(dishData: {
+    name: "Fried Chicken"
+    recipe: "Fry it"
+    complexity: 3
+    ingredients: [ 2 ]
+  }) {
+    	dish { id }
+  }
+}
+```
+
+Deleting an object (see schema_mutations.py, DeleteDish):
+```graphql
+mutation {
+  deleteDish(id: 3) {
+    ok
+  }
+}
+```
+
+Modifying an object (see schema_mutations.py, ModifyDish):
+```graphql
+mutation {
+  updateDish(dishData: {
+    id: 5
+    name: "Fried Chicken"
+    ingredients: [ 3 ]
+  }) {
+    	dish { id }
+  }
+}
+```
