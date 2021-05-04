@@ -1,0 +1,8 @@
+[{"model": "ingredients.dish", "pk": 1, "fields": {
+    "name": "Eggs & Beef", "recipe": "Fry on both sides",
+    "ingredients": [1, 3]
+  }},
+  {"model": "ingredients.dish", "pk": 2, "fields": {
+    "name": "Milk Chicken", "recipe": "Boil in milk",
+    "ingredients": [2, 4]
+  }}]

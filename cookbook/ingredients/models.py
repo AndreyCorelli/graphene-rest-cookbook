@@ -17,3 +17,13 @@ class Ingredient(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Dish(models.Model):
+    name = models.CharField(max_length=100)
+    recipe = models.TextField()
+    ingredients = models.ManyToManyField(Ingredient)
+    complexity = models.IntegerField(default=5)
+
+    def __str__(self):
+        return self.name

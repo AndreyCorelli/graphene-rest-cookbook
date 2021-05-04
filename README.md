@@ -9,6 +9,14 @@ Install packages:
 pip install -r requirements.txt
 ```
 
+Apply migrations to the database, create superuser and import fixtures:
+```shell
+./manage.py migrate
+./manage.py loaddata ingredients
+./manage.py loaddata dishes 
+./manage.py createsuperuser
+```
+
 Run
 ```shell
 ./manage.py runserver
@@ -25,3 +33,19 @@ http://localhost:8000/admin/
 
 ... or navigate to the GraphQL debug webpage:
 http://localhost:8000/graphql/
+
+# 3 Example queries
+## 3.1 Read operations
+Read all dishes w/o filtering, include id, recipe and ingredients fields.
+Select name of each of the ingredients.
+```graphql
+query {
+  allDishes {
+    id
+    recipe
+    ingredients {
+      name
+    }
+  }
+}
+```
