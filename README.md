@@ -9,13 +9,14 @@ Install packages:
 pip install -r requirements.txt
 ```
 
-Apply migrations to the database, create superuser and import fixtures:
+(Optionally) apply migrations to the database, create superuser and import fixtures:
 ```shell
 ./manage.py migrate
 ./manage.py loaddata ingredients
 ./manage.py loaddata dishes 
 ./manage.py createsuperuser
 ```
+The repository already includes SqLite database (file db.sqlite3) with sample data.
 
 Run
 ```shell
@@ -98,4 +99,19 @@ mutation {
     	dish { id }
   }
 }
+```
+
+## 4 Build and run Docker image
+Build image: just run 
+```shell
+sudo docker build -t graphene-cookbook .
+```
+command. When the image is built run
+
+```shell
+docker run -it -p 8020:8020 \
+     -e DJANGO_SUPERUSER_USERNAME=Administrator \
+     -e DJANGO_SUPERUSER_PASSWORD=Administrator \
+     -e DJANGO_SUPERUSER_EMAIL=admin@example.com \
+     graphene-cookbook
 ```
