@@ -18,15 +18,25 @@ from django.contrib import admin
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
+from django.urls import include
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 from graphene_django.views import GraphQLView
 
+from cookbook.ingredients import views
 from cookbook.schema import schema
 
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'ingredients', views.IngredientViewSet)
+router.register(r'categories', views.CategoryViewSet)
+
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("graphql", csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
+    path('admin/', admin.site.urls),
+    path('graphql', csrf_exempt(GraphQLView.as_view(graphiql=True, schema=schema))),
+    path('', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
 
 # Put the line provided below into your `urlpatterns` list.
