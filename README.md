@@ -64,6 +64,25 @@ query {
 }
 ```
 
+This query is a bit more complex variant of the previous one:
+```graphql
+query {
+  firstDish: allDishes(skip: 0, first: 1) {
+    ... dishSummary
+  }
+  secondDish: allDishes(skip: 1, first: 1) {
+    ... dishSummary
+  }
+}
+
+fragment dishSummary on DishType {
+  recipe
+  ingredients {
+    name
+  }
+}
+````
+
 ## 3.2 Create / delete an object
 See schema_mutations.py, class CreateDish:
 ```graphql

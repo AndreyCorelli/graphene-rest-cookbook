@@ -1,12 +1,17 @@
 import graphene
 from django.db.models import Q
-
 from cookbook.ingredients.models import Category, Ingredient, Dish
 from cookbook.schema_types import IngredientType, DishType, CategoryType
 
 
 class Query(graphene.ObjectType):
-    all_ingredients = graphene.List(IngredientType)
+    # TODO: resolve import errors to use DjangoFilterConnectionField
+    # supports filtering query by django filtering predicates, e.g.
+    # allIngredients(name_Icontains: "e", category_Name: "Meat") { ...
+    all_ingredients = graphene.Field(IngredientType)
+
+    # "all_dishes" is not a simple list, but a function-resolved query
+    # (resolve_all_dishes). The query accepts 3 optional arguments
     all_dishes = graphene.List(DishType,
                                search=graphene.String(),
                                first=graphene.Int(),

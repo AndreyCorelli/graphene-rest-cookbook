@@ -1,0 +1,65 @@
+schema {
+  query: Query
+  mutation: Mutation
+}
+
+type CategoryType {
+  id: ID!
+  name: String!
+  ingredients: [IngredientType!]!
+}
+
+type CreateDish {
+  dish: DishType
+  ok: Boolean
+}
+
+type DeleteDish {
+  ok: Boolean
+}
+
+input DishInput {
+  name: String
+  recipe: String
+  complexity: Int
+  ingredients: [Int]
+}
+
+type DishType {
+  id: ID!
+  recipe: String!
+  ingredients: [IngredientType!]!
+  complexity: Int!
+}
+
+input DishUpdateInput {
+  name: String
+  recipe: String
+  complexity: Int
+  ingredients: [Int]
+  id: Int
+}
+
+type IngredientType {
+  id: ID!
+  name: String!
+  notes: String!
+  category: CategoryType!
+}
+
+type Mutation {
+  createDish(dishData: DishInput!): CreateDish
+  updateDish(dishData: DishUpdateInput!): UpdateDish
+  deleteDish(id: ID): DeleteDish
+}
+
+type Query {
+  allIngredients: [IngredientType]
+  allDishes(search: String, first: Int, skip: Int): [DishType]
+  categoryByName(name: String!): CategoryType
+}
+
+type UpdateDish {
+  dish: DishType
+  ok: Boolean
+}
