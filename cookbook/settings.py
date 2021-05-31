@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'cookbook.ingredients',
     'graphene_django',
     'rest_framework',
+    'ninja',
 ]
 
 MIDDLEWARE = [
